@@ -13,22 +13,35 @@ export class StationMetadataService {
   /**
    * Read Station Metadata
    * Retrieve multiple station metadata.
-   * @param stid Station id or comma seperated list, for example 'SVB' or 'SVB,BNRI1'
-   * @param source Station source. Possible sources are ['mesowest', 'snotel']
-   * @param bbox Bounding box, comma seperated list from lower
-   * left to upper right. For example, '-116,45,-115,47'
-   * @param limit Limit the number of stations returned
-   * @param accept
    * @returns any Successful Response
    * @throws ApiError
    */
-  public static readStationMetadataWxV1StationMetadataGet(
+  public static readStationMetadataWxV1StationMetadataGet({
+    stid,
+    source,
+    bbox,
+    limit,
+    accept,
+  }: {
+    /**
+     * Station id or comma seperated list, for example 'SVB' or 'SVB,BNRI1'
+     */
     stid?: string,
+    /**
+     * Station source. Possible sources are ['mesowest', 'snotel']
+     */
     source?: string,
+    /**
+     * Bounding box, comma seperated list from lower
+     * left to upper right. For example, '-116,45,-115,47'
+     */
     bbox?: string,
+    /**
+     * Limit the number of stations returned
+     */
     limit?: number,
     accept?: string,
-  ): CancelablePromise<any> {
+  }): CancelablePromise<any> {
     return __request(OpenAPI, {
       method: 'GET',
       url: '/wx/v1/station/metadata/',
@@ -50,13 +63,14 @@ export class StationMetadataService {
   /**
    * Get Station Metadata
    * Get station metadata by it's UUID
-   * @param id
    * @returns StationMetadata Successful Response
    * @throws ApiError
    */
-  public static getStationMetadataWxV1StationMetadataIdGet(
+  public static getStationMetadataWxV1StationMetadataIdGet({
+    id,
+  }: {
     id: string,
-  ): CancelablePromise<StationMetadata> {
+  }): CancelablePromise<StationMetadata> {
     return __request(OpenAPI, {
       method: 'GET',
       url: '/wx/v1/station/metadata/{id}',

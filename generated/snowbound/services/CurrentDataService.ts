@@ -10,17 +10,24 @@ export class CurrentDataService {
   /**
    * Get Station Data Current
    * Retrieve station data
-   * @param units Units return data in
-   * @param calcDiff Calculate 24hr difference
-   * @param accept
    * @returns any Successful Response
    * @throws ApiError
    */
-  public static getStationDataCurrentWxV1StationDataCurrentGet(
-    units: string = 'default',
-    calcDiff: boolean = false,
+  public static getStationDataCurrentWxV1StationDataCurrentGet({
+    units = 'default',
+    calcDiff = false,
+    accept,
+  }: {
+    /**
+     * Units return data in
+     */
+    units?: string,
+    /**
+     * Calculate 24hr difference
+     */
+    calcDiff?: boolean,
     accept?: string,
-  ): CancelablePromise<any> {
+  }): CancelablePromise<any> {
     return __request(OpenAPI, {
       method: 'GET',
       url: '/wx/v1/station/data/current/',

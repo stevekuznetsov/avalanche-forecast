@@ -26,13 +26,14 @@ export class VariableTrackingService {
   /**
    * Upsert Variable Tracking
    * Upsert variable in bulk
-   * @param requestBody
    * @returns VariableTrackingCreate Successful Response
    * @throws ApiError
    */
-  public static upsertVariableTrackingWxV1VariableTrackingPost(
+  public static upsertVariableTrackingWxV1VariableTrackingPost({
+    requestBody,
+  }: {
     requestBody: Array<VariableTrackingCreate>,
-  ): CancelablePromise<Array<VariableTrackingCreate>> {
+  }): CancelablePromise<Array<VariableTrackingCreate>> {
     return __request(OpenAPI, {
       method: 'POST',
       url: '/wx/v1/variable/tracking/',
@@ -47,13 +48,14 @@ export class VariableTrackingService {
   /**
    * Delete Tracking
    * Remove a variable being tracked by id
-   * @param variableTrackingId
    * @returns VariableTracking Successful Response
    * @throws ApiError
    */
-  public static deleteTrackingWxV1VariableTrackingVariableTrackingIdDelete(
+  public static deleteTrackingWxV1VariableTrackingVariableTrackingIdDelete({
+    variableTrackingId,
+  }: {
     variableTrackingId: string,
-  ): CancelablePromise<VariableTracking> {
+  }): CancelablePromise<VariableTracking> {
     return __request(OpenAPI, {
       method: 'DELETE',
       url: '/wx/v1/variable/tracking/{variable_tracking_id}',

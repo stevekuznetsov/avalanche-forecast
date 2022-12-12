@@ -12,15 +12,22 @@ export class StationNoteService {
   /**
    * Get Notes
    * Retrieve notes for the client
-   * @param stid Station id or comma seperated list, for example 'SVB' or 'SVB,BNRI1'
-   * @param status Note status, one of [active, inactive, deleted]
    * @returns StationNote Successful Response
    * @throws ApiError
    */
-  public static getNotesWxV1StationNoteGet(
+  public static getNotesWxV1StationNoteGet({
+    stid,
+    status,
+  }: {
+    /**
+     * Station id or comma seperated list, for example 'SVB' or 'SVB,BNRI1'
+     */
     stid?: string,
+    /**
+     * Note status, one of [active, inactive, deleted]
+     */
     status?: string,
-  ): CancelablePromise<Array<StationNote>> {
+  }): CancelablePromise<Array<StationNote>> {
     return __request(OpenAPI, {
       method: 'GET',
       url: '/wx/v1/station/note/',

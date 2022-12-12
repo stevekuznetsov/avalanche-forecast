@@ -12,7 +12,14 @@ export const useTimeSeries = (station_id: number, source: string, token: string)
     ['time-series', station_id, source],
     async () => {
       OpenAPI.BASE = clientProps.snowboundHost;
-      const data = TimeseriesDataService.getStationDataTimeseriesWxV1StationDataTimeseriesGet(station_id.toString(), source);
+      console.log({station_id, source, token});
+      const data = TimeseriesDataService.getStationDataTimeseriesWxV1StationDataTimeseriesGet({
+        stid: station_id.toString(),
+        source,
+        // @ts-ignore token is an undocumented param for API auth
+        token,
+        // TODO: have to pass start and end date or this blows up
+      });
       return data;
     },
     {enabled: !!token},

@@ -15,15 +15,22 @@ export class StationTrackingService {
    * Get Station Tracked
    * Retrieve the station metadata for those stations that are
    * being tracked.
-   * @param stid Station id or comma seperated list, for example 'SVB' or 'SVB,BNRI1'
-   * @param source Station source. Possible sources are ['mesowest', 'snotel']
    * @returns StationMetadata Successful Response
    * @throws ApiError
    */
-  public static getStationTrackedWxV1StationTrackingGet(
+  public static getStationTrackedWxV1StationTrackingGet({
+    stid,
+    source,
+  }: {
+    /**
+     * Station id or comma seperated list, for example 'SVB' or 'SVB,BNRI1'
+     */
     stid?: string,
+    /**
+     * Station source. Possible sources are ['mesowest', 'snotel']
+     */
     source?: string,
-  ): CancelablePromise<Array<StationMetadata>> {
+  }): CancelablePromise<Array<StationMetadata>> {
     return __request(OpenAPI, {
       method: 'GET',
       url: '/wx/v1/station/tracking/',
@@ -40,13 +47,14 @@ export class StationTrackingService {
   /**
    * Create Station Tracking
    * Create a new station to track
-   * @param requestBody
    * @returns StationTracking Successful Response
    * @throws ApiError
    */
-  public static createStationTrackingWxV1StationTrackingPost(
+  public static createStationTrackingWxV1StationTrackingPost({
+    requestBody,
+  }: {
     requestBody: StationTrackingCreate,
-  ): CancelablePromise<StationTracking> {
+  }): CancelablePromise<StationTracking> {
     return __request(OpenAPI, {
       method: 'POST',
       url: '/wx/v1/station/tracking/',
@@ -62,13 +70,14 @@ export class StationTrackingService {
    * Delete Station Tracking Current
    * Delete a tracked station by id
    * TODO remove after migration
-   * @param stationMetadataId
    * @returns StationTracking Successful Response
    * @throws ApiError
    */
-  public static deleteStationTrackingCurrentWxV1StationTrackingStationMetadataIdDelete(
+  public static deleteStationTrackingCurrentWxV1StationTrackingStationMetadataIdDelete({
+    stationMetadataId,
+  }: {
     stationMetadataId: string,
-  ): CancelablePromise<StationTracking> {
+  }): CancelablePromise<StationTracking> {
     return __request(OpenAPI, {
       method: 'DELETE',
       url: '/wx/v1/station/tracking/{station_metadata_id}',
@@ -84,15 +93,16 @@ export class StationTrackingService {
   /**
    * Delete Station Tracking
    * Delete a tracked station by id
-   * @param stid
-   * @param source
    * @returns StationTracking Successful Response
    * @throws ApiError
    */
-  public static deleteStationTrackingWxV1StationTrackingStidSourceDelete(
+  public static deleteStationTrackingWxV1StationTrackingStidSourceDelete({
+    stid,
+    source,
+  }: {
     stid: string,
     source: string,
-  ): CancelablePromise<StationTracking> {
+  }): CancelablePromise<StationTracking> {
     return __request(OpenAPI, {
       method: 'DELETE',
       url: '/wx/v1/station/tracking/{stid}/{source}',
