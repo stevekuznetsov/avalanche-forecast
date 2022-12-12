@@ -1,23 +1,18 @@
 import React from 'react';
 
-import axios, {AxiosError} from 'axios';
 import {useQuery} from 'react-query';
 
 import {ClientContext, ClientProps} from '../clientContext';
+import {ApiError, OpenAPI, TimeseriesDataService} from '../generated/snowbound';
 import {TimeSeriesResponse} from '../types/snowbound';
 
 export const useTimeSeries = (station_id: number, source: string, token: string) => {
   const clientProps = React.useContext<ClientProps>(ClientContext);
-  return useQuery<TimeSeriesResponse, AxiosError | Error>(
+  return useQuery<TimeSeriesResponse, ApiError | Error>(
     ['time-series', station_id, source],
     async () => {
-      const {data} = await axios.get<TimeSeriesResponse>(`${clientProps.snowboundHost}/v1/station/timeseries`, {
-        params: {
-          stid: station_id,
-          source: source,
-          token: token,
-        },
-      });
+      OpenAPI.BASE = clientProps.snowboundHost;
+      const data = TimeseriesDataService.getStationDataTimeseriesWxV1StationDataTimeseriesGet(station_id.toString(), source);
       return data;
     },
     {enabled: !!token},
